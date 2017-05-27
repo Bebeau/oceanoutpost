@@ -1,0 +1,105 @@
+$blue: #00A4E1;
+$grey: #444444;
+$lightgrey: lighten($grey, 65%);
+$teal: #2BB293;
+
+@import "bourbon/bourbon";
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
+@font-face {
+  font-family: 'cocogoose';
+  src: url('assets/fonts/cocogoose.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.image-placeholder {
+	display: block;
+	height: 400px;
+	width: 100%;
+	border: 1px dashed #ccc;
+	position: relative;
+	.button {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		@include transform(translate(-50%,-50%));
+		&:focus, &:active {
+			@include transform(translate(-50%,-50%));
+		}
+		&.remove-image {
+			position: absolute;
+			z-index: 10;
+			top: 15px;
+			right: 15px;
+			left: auto;
+			width: 35px;
+			height: 35px;
+			background: white;
+			border: none;
+			font-weight: bold;
+			color: red;
+			@include transform(translate(0,0));
+			@include border-top-radius(50%);
+			@include border-bottom-radius(50%);
+		}
+	}
+}
+
+.text {
+	label {
+		line-height: 30px;
+	}
+	input {
+		box-shadow: none;
+		line-height: 40px;
+		font-size: 14pt;
+		width: 100%;
+		padding: 0 15px;
+	}
+}
+#BannerCTA {
+	color: white;
+	width: 400px;
+	height: 400px;
+	float: right;
+	text-align: center;
+	letter-spacing: 1px;
+	vertical-align: middle;
+	box-sizing: border-box;
+	padding: 0 25px 0 0;
+	@include transform-style(preserve-3d);
+	article {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		h1 {
+			font-size: 42pt;
+			font-family: 'Shadows Into Light', cursive;
+			color: white;
+		}
+		p {
+			line-height: 28pt;
+			font-size: 24pt;
+			font-family: 'Shadows Into Light', cursive;
+		}
+		.button {
+			position: relative;
+			top: auto;
+			left: auto;
+			background: $blue;
+			color: white;
+			border: none;
+			box-shadow: none;
+			text-transform: uppercase;
+			font-family: 'cocogoose', sans-serif;
+			font-size: 14pt;
+			line-height: 40px;
+			padding: 0 15px;
+			height: auto;
+			@include transform(translate(0,0));
+			@include border-top-radius(0);
+			@include border-bottom-radius(0);
+		}
+	}
+}
