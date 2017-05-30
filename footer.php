@@ -1,5 +1,10 @@
 		<!-- <div data-parallax='{"y" : 230, "smoothness": 1}' class="footerWrap"> -->
-			<div id="instafeed"></div>
+			
+			<div class="m-scooch m-fluid">
+				<i class="arrow left fa fa-angle-left" data-m-slide="prev"></i>
+				<i class="arrow right fa fa-angle-right" data-m-slide="next"></i>
+				<div id="instafeed" class="m-scooch-inner"></div>
+			</div>
 			
 			<section id="Newsletter">
 				<article>

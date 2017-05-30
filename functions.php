@@ -70,16 +70,20 @@ function after_add_to_cart_button() {
     echo '<img id="globalsign" src="'.get_bloginfo('template_directory').'/assets/images/globalsign.png" alt="" />';
 
 }
-remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-add_action( 'woocommerce_product_thumbnails', 'add_woo_tabs', 30 );
-function add_woo_tabs() {
-    wc_get_template( 'single-product/tabs/tabs.php' );
+if ( !wp_is_mobile() ) {
+    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+    add_action( 'woocommerce_product_thumbnails', 'add_woo_tabs', 30 );
+    function add_woo_tabs() {
+        wc_get_template( 'single-product/tabs/tabs.php' );
+    }
 }
+
 add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
 function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['additional_information'] );
     return $tabs;
 }
+
 
 // Thumbnail Support
 add_theme_support( 'post-thumbnails', array('post') );

@@ -468,11 +468,51 @@ header {
 	}
 }
 #instafeed {
-	margin: 25px 0 -6px 0;
-	span {
+	margin: 0 0 -6px 0;
+	a {
 		width: 20%;
 		height: 300px;
 		display: inline-block;
+		span {
+			width: 100%;
+			height: 100%;
+		}
+		.playwrap {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -25px 0 0 -25px;
+			width: 50px;
+			height: 50px;
+			vertical-align: middle;
+			background: $blue;
+			text-align: center;
+			@include border-top-radius(50%);
+			@include border-bottom-radius(50%);
+			@include transition(all 0.2s ease-in-out);
+			@include transform(scale(0));
+			i {
+				font-size: 18px;
+				display: block;
+				color: #fff;
+				z-index: 100;
+				position: relative;
+				left: 2px;
+				line-height: 50px;
+				color: white;
+				&.fa-pause {
+					left: 0;
+				}
+				&.fa-plus {
+					left: 0;
+				}
+			}
+		}
+		&:hover {
+			.playwrap {
+				@include transform(scale(1));
+			}
+		}
 	}
 }
 #blogListing {

@@ -360,88 +360,89 @@
 					box-sizing: border-box;
 					padding: 25px 25px 0 0;
 				}
-				.woocommerce-tabs {
-					text-align: left;
-					margin: 25px auto;
-					.tabs {
-						margin: 0;
-						padding: 0;
-						text-align: center;
-						&:before {
-							bottom: 50%;
-							z-index: 1;
+			}
+			.woocommerce-tabs {
+				text-align: left;
+				margin: 25px auto;
+				.tabs {
+					margin: 0;
+					padding: 0;
+					text-align: center;
+					&:before {
+						bottom: 50%;
+						z-index: 1;
+						border-bottom: 1px solid $lightgrey;
+					}
+					li {
+						border: none;
+						background: none;
+						font-family: 'cocogoose', sans-serif;
+						font-size: 14pt;
+						text-transform: uppercase;
+						background: white;
+						position: relative;
+						z-index: 2;
+						&:before,&:after {
+							display: none;
 						}
-						li {
-							border: none;
-							background: none;
-							font-family: 'cocogoose', sans-serif;
-							font-size: 14pt;
-							text-transform: uppercase;
-							background: white;
-							position: relative;
-							z-index: 2;
-							&:before,&:after {
-								display: none;
-							}
+						a {
+							color: #cccccc;
+						}
+						&.active {
 							a {
-								color: #cccccc;
-							}
-							&.active {
-								a {
-									color: $grey;
-								}
+								color: $grey;
 							}
 						}
 					}
-					#respond {
-						background: $lightgrey;
+				}
+				#respond {
+					background: $lightgrey;
+					box-sizing: border-box;
+					padding: 25px;
+					#reply-title {
+						font-size: 1.5em;
+						margin: 0 0 15px;
+					}
+					label {
+						font-size: 10pt;
+					}
+					textarea {
+						border: 1px solid darken($lightgrey,10%);
+						max-width: 100%;
+						min-height: 150px;
 						box-sizing: border-box;
-						padding: 25px;
-						#reply-title {
-							font-size: 1.5em;
-							margin: 0 0 15px;
+						padding: 10px;
+						font-size: 14pt;
+						&:focus {
+							outline: none;
 						}
-						label {
-							font-size: 10pt;
-						}
-						textarea {
-							border: 1px solid darken($lightgrey,10%);
-							max-width: 100%;
-							min-height: 150px;
-							box-sizing: border-box;
-							padding: 10px;
-							font-size: 14pt;
-							&:focus {
-								outline: none;
-							}
-						}
-						.stars {
-							margin: 0;
-						}
-						#submit {
-							display: inline-block;
-							position: relative;
-							top: auto;
-							left: auto;
-							background: $blue;
-							color: white;
-							border: none;
-							box-shadow: none;
-							text-transform: uppercase;
-							font-family: 'cocogoose', sans-serif;
-							font-size: 14pt;
-							line-height: 40px;
-							padding: 0 15px;
-							height: auto;
-							letter-spacing: 1px;
-							@include transform(translate(0,0));
-							@include border-top-radius(0);
-							@include border-bottom-radius(0);
-							@include transition(all 0.3s $authenticMotion);
-						}
-						p.form-submit {
-							text-align: right;
-						}
+					}
+					.stars {
+						margin: 0;
+					}
+					#submit {
+						display: inline-block;
+						position: relative;
+						top: auto;
+						left: auto;
+						background: $blue;
+						color: white;
+						border: none;
+						box-shadow: none;
+						text-transform: uppercase;
+						font-family: 'cocogoose', sans-serif;
+						font-size: 14pt;
+						line-height: 40px;
+						padding: 0 15px;
+						height: auto;
+						letter-spacing: 1px;
+						@include transform(translate(0,0));
+						@include border-top-radius(0);
+						@include border-bottom-radius(0);
+						@include transition(all 0.3s $authenticMotion);
+					}
+					p.form-submit {
+						text-align: right;
 					}
 				}
 			}
@@ -462,6 +463,10 @@
 					}
 					.sku_wrapper, .posted_in, .tagged_as {
 						display: block;
+					}
+					.sku_wrapper {
+						border-top: 1px solid $lightgrey;
+						padding-top: 15px;
 					}
 				}
 				#productTrust {
