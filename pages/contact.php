@@ -17,14 +17,14 @@ Template Name: Contact Page
 		<form action="<?php bloginfo('template_directory');?>/partials/forms/contact.php" method="post" id="contact_frm" name="contact_frm" class="wpcf7-form form-horizontal form">
 			
 			<section>
-				<article>
+				<div>
 					<label for="fname" class="control-label"> First Name <span class="required">*</span></label>
 					<input type="text" name="fname" id="fname" value="" class="textfield form-control" placeholder="first name" />
-				</article>
-				<article>
+				</div>
+				<div>
 					<label for="lname" class="control-label"> Last Name <span class="required">*</span></label>
 					<input type="text" name="lname" id="lname" value="" class="textfield form-control" placeholder="last name" />
-				</article>
+				</div>
 			</section>
 
 			<section>
@@ -37,7 +37,7 @@ Template Name: Contact Page
 		    	<textarea name="message" id="message" class="textarea form-control" rows="5" placeholder="Tell us what you think..."></textarea> 
 			</section>
 
-			<button type="submit" class="btn-submit btn btn-primary btn-large btn-block">Send Message</button>
+			<button type="submit" class="button">Send Message</button>
 
 			<div id="security">
 				If you see this, leave this form field blank.
