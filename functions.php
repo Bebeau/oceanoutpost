@@ -224,6 +224,66 @@ function my_textbox_callback($args) {  // Textbox Callback
     echo '<input type="text" class="regular-text" id="'. $args[0] .'" name="'. $args[0] .'" value="' . $option . '" />';
 }
 
+// Add custom meta boxes to display youtube video
+add_action( 'add_meta_boxes', 'youtube_video_meta_box', 1 );
+function youtube_video_meta_box( $post ) {
+    add_meta_box(
+        'video', 
+        'YouTube Video Link', 
+        'youtube_video_link', 
+        'post',
+        'side', 
+        'high'
+    );
+    add_meta_box(
+        'video', 
+        'YouTube Video Link', 
+        'youtube_video_link', 
+        'page',
+        'side', 
+        'high'
+    );
+}
+// create custom youtube video link input
+function youtube_video_link() { 
+    global $post;
+    wp_nonce_field( basename( __FILE__ ), 'youtube_video_link' );
+    $prfx_stored_meta = get_post_meta( $post->ID );
+    ?>
+    <div>
+        <?php 
+            if ( !empty( $prfx_stored_meta['video_link'][0] ) ) {
+                echo '<iframe width="100%" height="140" src="https://www.youtube.com/embed/'.$prfx_stored_meta['video_link'][0].'" frameborder="0" allowfullscreen showinfo="0"></iframe>'; 
+                echo '<button class="remove-btn button" style="display:block;width:100%;" data-post="'.$post->ID.'">Remove Video</button>';
+            }
+        ?>
+        <input type="<?php if ( !empty( $prfx_stored_meta['video_link'][0] ) ) { echo 'hidden'; } else { echo 'text'; } ?>" name="video_link" id="video_link" value="<?php if ( !empty( $prfx_stored_meta['video_link'][0] ) ) { echo $prfx_stored_meta['video_link'][0]; } else { echo ''; } ?>" style="width:100%;margin: 5px 0 10px;" placeholder="http://..." />
+    </div>
+<?php 
+}
+// save video link
+function youtube_video_link_save( $post_id ) {
+    // Checks save status
+    $is_autosave = wp_is_post_autosave( $post_id );
+    $is_revision = wp_is_post_revision( $post_id );
+    $is_valid_nonce = ( isset( $_POST[ 'video_link' ] ) && wp_verify_nonce( $_POST[ 'youtube_video_link' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+    // Exits script depending on save status
+    if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+        return;
+    }
+    // Checks for input and sanitizes/saves if needed
+    if( isset( $_POST[ 'video_link' ] )) {
+        if(filter_var($_POST[ 'video_link' ], FILTER_VALIDATE_URL) ) {
+            parse_str( parse_url( $_POST[ 'video_link' ], PHP_URL_QUERY ), $my_array_of_vars );
+            $videoID = $my_array_of_vars['v'];
+        } else {
+            $videoID = $_POST[ 'video_link' ];
+        }
+        update_post_meta( $post_id, 'video_link', $videoID );
+    }
+}
+add_action( 'save_post', 'youtube_video_link_save' );
+
 // Custom Scripting to Move JavaScript from the Head to the Footer
 function remove_head_scripts() { 
    remove_action('wp_head', 'wp_print_scripts'); 

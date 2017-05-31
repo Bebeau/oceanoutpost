@@ -88,7 +88,7 @@
 				 	?>
 				</article>
 				<article>
-					<h4>Customer Service</h4>
+					<h4>Customer Care</h4>
 					<?php
 						$menu_args = array(		
 				 			'theme_location'  => 'customer-service-menu',		
@@ -121,6 +121,7 @@
 					</script>
 					<!-- autorize.net seal  -->
 					<script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script> 
+					<p>Your transaction is 100% safe and secure.</p>
 				</article>
 			</footer>
 

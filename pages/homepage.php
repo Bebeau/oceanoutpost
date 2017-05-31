@@ -68,7 +68,7 @@ echo '<section class="main">';
 		    echo '<article>';
 		    	echo '<a href="'.get_term_link($cat->term_id).'">';
 					echo '<h3>'.$cat->name.'</h3>';
-					echo '<span style="background:url('.$image.') no-repeat scroll center / cover">';
+					echo '<img src="'.$image.'" alt="" />';
 				echo '</a>';
 			echo '</article>';
 		}
