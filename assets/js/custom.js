@@ -134,7 +134,10 @@ var init = {
                 window.alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
             }
         });
-    }
+    },
+	newsletterBtn: function() {
+		jQuery('#newsletterFrm').submit(init.newsletterSubmit);
+	},
 };
 
 jQuery(document).ready(function() {

@@ -97,7 +97,7 @@ var user = {
 	            },
 	            dataType: 'html',
 	            success : function(data) {
-	            	jQuery('#BannerCTA .'+element).html(data);
+	            	jQuery('.'+element).html(data);
 	            }
 	        });
 		});

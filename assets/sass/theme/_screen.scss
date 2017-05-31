@@ -617,28 +617,45 @@ header {
 	background: $blue;
 	color: white;
 	box-sizing: border-box;
-	padding: 25px;
 	text-align: center;
-	article {
-		vertical-align: middle;
+	overflow: hidden;
+	.news_image {
+		position: relative;
+		width: 50%;
 		display: inline-block;
-		text-align: center;
-		width: 400px;
-		letter-spacing: 1px;
-		font-family: 'Shadows Into Light', cursive;
-		margin-right: 25px;
-		h3 {
-			margin: 0;
-			font-size: 21pt;
+		vertical-align: middle;
+		margin-bottom: -6px;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient( to right, transparent, $blue);
+			width: 50%;
 		}
-		p {
-			font-size: 14pt;
-			margin: 10px 0 0;
-			line-height: 18pt;
+		img {
+			min-width: 100%;
+			height: auto;
 		}
 	}
 	form {
+		width: 50%;
 		display: inline-block;
+		vertical-align: middle;
+		h3 {
+			margin: 0;
+			font-size: 28pt;
+			font-family: 'Shadows Into Light', cursive;
+			letter-spacing: 1px;
+		}
+		p {
+			font-size: 16pt;
+			margin: 10px auto 25px;
+			line-height: 18pt;
+			width: 500px;
+		}
 		::placeholder {
 			font-family: 'Shadows Into Light', cursive;
 			color: white;
@@ -653,7 +670,7 @@ header {
 			margin: 0 10px;
 			line-height: 40px;
 			letter-spacing: 1px;
-			width: 175px;
+			width: 200px;
 			font-family: 'Shadows Into Light', cursive;
 			&:focus {
 				outline: none;
@@ -674,13 +691,28 @@ header {
 #sidebar {
 	#Newsletter {
 		margin-bottom: 25px;
+		overflow: visible;
 		img {
-			margin-top: -100px;
+			&.default {
+				margin-top: -100px;
+			}
 		}
 		article {
 			width: 100%;
 		}
 		form {
+			float: none;
+			width: 100%;
+			box-sizing: border-box;
+			padding: 25px;
+			h3 {
+				font-size: 21pt;
+			}
+			p {
+				width: 100%;
+				font-size: 14pt;
+				margin: 10px auto;
+			}
 			input {
 				width: 100%;
 				margin: 0 0 15px;

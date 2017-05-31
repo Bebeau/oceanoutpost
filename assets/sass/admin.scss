@@ -12,7 +12,80 @@ $teal: #2BB293;
   font-weight: 600;
   font-style: normal;
 }
-
+#newsImage {
+	.image-placeholder {
+		height: auto;
+		background: $blue;
+		&:after {
+			content: "";
+			clear: both;
+			float: none;
+			display: block;
+		}
+		img {
+			width: 50%;
+			height: auto;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+	#NewsletterCTA {
+		width: 50%;
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		color: white;
+		background: $blue;
+		box-sizing: border-box;
+		padding: 25px 25px 50px;
+		h1 {
+			margin: 0;
+			font-size: 28pt;
+			font-family: 'Shadows Into Light', cursive;
+			letter-spacing: 1px;
+			color: white;
+		}
+		p {
+			font-size: 16pt;
+			margin: 15px auto 15px;
+			line-height: 18pt;
+			max-width: 500px;
+		}
+		input {
+			box-shadow: none;
+			background: none;
+			border: none;
+			border-bottom: 1px solid white;
+			font-size: 16pt;
+			color: white;
+			padding: 0;
+			margin: 0 10px;
+			line-height: 40px;
+			letter-spacing: 1px;
+			width: 200px;
+			font-family: 'Shadows Into Light', cursive;
+			&:focus {
+				outline: none;
+			}
+		}
+		::placeholder {
+			font-family: 'Shadows Into Light', cursive;
+			color: white;
+		}
+		button {
+			font-family: 'cocogoose', sans-serif;
+			text-transform: uppercase;
+			border: none;
+			background: white;
+			color: $blue;
+			font-size: 14pt;
+			letter-spacing: 1px;
+			margin: 25px 0 0;
+			padding: 0 15px;
+			line-height: 40px;
+		}
+	}
+}
 .image-placeholder {
 	display: block;
 	height: 400px;
