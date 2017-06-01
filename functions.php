@@ -3,6 +3,9 @@
 // Hide admin bar
 add_filter('show_admin_bar', '__return_false');
 
+// remove default woocommerce styles
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
 // Load all styles and scripts for the site
 if (!function_exists( 'load_custom_scripts' ) ) {
 	function load_custom_scripts() {
