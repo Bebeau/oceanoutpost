@@ -74,7 +74,7 @@ var init = {
             accessToken: '1635858871.3c5b1be.22b80aa381db4a969585979a492458f2',
             resolution: 'standard_resolution',
             template: '<a class="m-item" href="{{link}}" target="_blank" style="background:url({{image}}) no-repeat scroll center / cover"><div class="playwrap"><i class="fa fa-plus"></i></div></a>',
-            limit: 20,
+            limit: 10,
             sortBy: 'most-recent'
         });
         userFeed.run();
