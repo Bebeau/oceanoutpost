@@ -18,10 +18,8 @@ var init = {
         init.singleProduct();
 	},
 	preLoad: function() {
-        // Wait for window load
         jQuery(window).load(function() {
-            // Animate loader off screen
-            jQuery("#loader").fadeOut();
+            jQuery("#loader").fadeOut(); 
         });
     },
 	singleProduct: function() {
