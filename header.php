@@ -89,6 +89,7 @@
 </head>
 
 <style>
+	@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 	#loader{
 		position: fixed;
 		width: 100%;
