@@ -9,6 +9,7 @@ $(function(){ParallaxScroll.init()});var ParallaxScroll={showLogs:!1,round:1e3,i
 
 var init = {
 	onReady: function() {
+		init.preLoad();
 		init.openMenu();
 		init.tabs();
 		init.instafeed();
@@ -16,6 +17,13 @@ var init = {
         init.scooch();
         init.singleProduct();
 	},
+	preLoad: function() {
+        // Wait for window load
+        jQuery(window).load(function() {
+            // Animate loader off screen
+            jQuery("#loader").fadeOut();
+        });
+    },
 	singleProduct: function() {
 		jQuery('.woocommerce-product-gallery__image a').click(function(e) {
 			e.preventDefault();

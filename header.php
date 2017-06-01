@@ -85,15 +85,36 @@
 		<meta property="twitter:url" content="<?php the_permalink() ?>" />
 		<meta property="twitter:domain" content="<?php echo site_url(); ?>">
 	<?php } ?>
-
-	<!-- WP Generated Header
-	================================================== --> 
-	<?php wp_head(); ?>
     
 </head>
 
+<style>
+	#loader{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: #00A4E1;
+		top: 0;
+	}
+	#loader i {
+		display: block;
+		position: fixed;
+		font-size: 48pt;
+		top: 50%;
+		left: 50%;
+		margin: -32.5px 0 0 -28px;
+		color: white;
+	}
+</style>
+
 <body <?php body_class(); ?>>
 <?php global $woocommerce; ?>
+
+<div id="loader">
+	<i class="fa fa-spinner fa-spin"></i>
+</div>
+
 <header>
 	<div class="nomobile">
 		<section id="topbar">
