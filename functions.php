@@ -10,7 +10,7 @@ add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 if (!function_exists( 'load_custom_scripts' ) ) {
 	function load_custom_scripts() {
 		// Styles
-		wp_enqueue_style( 'Style CSS', get_bloginfo( 'template_url' ) . '/style.css', false, '', 'all' );
+		wp_enqueue_style( 'Style CSS', get_bloginfo( 'template_url' ) . '/style.css?refresh', false, '', 'all' );
 
 		// Load default Wordpress jQuery
 		wp_deregister_script('jquery');
