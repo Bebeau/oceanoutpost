@@ -13,6 +13,8 @@ $lightgrey: lighten($grey, 65%);
 $teal: #2BB293;
 $yellow: #ffd669;
 
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
 @import "bourbon/bourbon";
 
 @import "theme/_print.scss";
