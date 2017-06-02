@@ -333,6 +333,7 @@ header {
 	}
 	#cats {
 		margin: 50px auto 100px;
+		text-align: center;
 		h3 {
 			font-family: 'Shadows Into Light', cursive;
 			font-size: 24pt;
@@ -344,7 +345,6 @@ header {
 		}
 		article {
 			display: inline-block;
-			width: 33%;
 			box-sizing: border-box;
 			a {
 				box-sizing: border-box;

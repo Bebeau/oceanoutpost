@@ -64,11 +64,11 @@ echo '<section class="main">';
 			// get the thumbnail id using the queried category term_id
 		    $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true ); 
 		    // get the image URL
-		    $image = wp_get_attachment_url( $thumbnail_id );
+		    $image = wp_get_attachment_image_src( $thumbnail_id, 'medium', false );
 		    echo '<article>';
 		    	echo '<a href="'.get_term_link($cat->term_id).'">';
 					echo '<h3>'.$cat->name.'</h3>';
-					echo '<img src="'.$image.'" alt="" />';
+					echo '<img src="'.$image[0].'" alt="" />';
 				echo '</a>';
 			echo '</article>';
 		}
