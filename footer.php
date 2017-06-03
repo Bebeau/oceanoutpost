@@ -113,14 +113,14 @@
 				</article>
 				<article>
 					<h4>Secure Shopping Guaranteed</h4>
-					<img src="<?php bloginfo('template_directory'); ?>/assets/images/payment.png" alt="" />
+					<img src="<?php bloginfo('template_directory'); ?>/assets/images/payment.jpg" alt="" />
 					<!-- godaddy seal -->
-					<!-- <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=pItXJFWCyHYvgN1n04wXaGJrm0Umh1hvYy4wPG7tX9GZu6vZKYcObSAD"></script>
+					<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=pItXJFWCyHYvgN1n04wXaGJrm0Umh1hvYy4wPG7tX9GZu6vZKYcObSAD"></script>
 					<script type="text/javascript" language="javascript">
 						var ANS_customer_id="80bf5a55-f6c8-44f3-a96e-75dc1f54f6f3";
-					</script> -->
+					</script>
 					<!-- autorize.net seal  -->
-					<!-- <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script> -->
+					<script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>
 					<p>Your transaction is 100% safe and secure.</p>
 				</article>
 			</footer>
