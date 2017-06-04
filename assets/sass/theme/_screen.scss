@@ -27,6 +27,9 @@ html,body {
 	padding: 0;
 	font-family: 'din light';
 	color: $grey;
+	&.freeze {
+		overflow: hidden;
+	}
 }
 a, button {
 	text-decoration: none;
@@ -613,8 +616,9 @@ header {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: $blue;
-	z-index: 9999;
+	background: rgba(68,68,68,0.9);
+	z-index: 9;
+	text-align: center;
 	@include transform(translate(0,-100%));
 	@include transition(all 0.3s $authenticMotion);
 	&.in {
@@ -622,11 +626,55 @@ header {
 		@include transform(translate(0,0));
 		@include transition(all 0.3s $authenticMotion);
 	}
+	article {
+		display: inline-block;
+	}
 	iframe {
 		display: block;
-		width: 600px;
-		height: 410px;
+		width: 853px;
+		height: 480px;
 		margin: 0 auto;
+		position: relative;
+		z-index: 100;
+	}
+	.closeModal {
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: 36pt;
+		color: white;
+		z-index: 99;
+		@include transform(rotate(0));
+		@include transition(all 0.3s $authenticMotion);
+		&.in {
+			right: -50px;
+			@include transform(rotate(180deg));
+			@include transition(all 0.3s $authenticMotion);
+		}
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	.social-share {
+		display: block;
+		position: absolute;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		font-size: 36pt;
+		color: white;
+		z-index: 99;
+		@include transform(rotate(0));
+		@include transition(all 0.3s $authenticMotion);
+		&.in {
+			bottom: -100px;
+			@include transform(rotate(180deg));
+			@include transition(all 0.3s $authenticMotion);
+		}
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
 #blogListing {
@@ -649,9 +697,13 @@ header {
 			width: 100%;
 			height: 300px;
 			display: block;
+			position: relative;
 			.playwrap {
-				vertical-align: middle;
-				@include transform(translate(0,125px));
+				position: relative;
+				z-index: 999;
+				height: 300px;
+				@include transform(scale(1));
+				@include transition(all 0.3s $easeInOutBack);
 				i {
 					color: white;
 					background: $blue;
@@ -663,6 +715,11 @@ header {
 					margin: 0 auto;
 					@include border-top-radius(50%);
 					@include border-bottom-radius(50%);
+				}
+				&:hover {
+					cursor: pointer;
+					@include transform(scale(1.5));
+					@include transition(all 0.3s $easeInOutBack);
 				}
 			}
 		}

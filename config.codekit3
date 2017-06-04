@@ -2220,6 +2220,12 @@
 		"oAP": "\/partials\/theme\/social-links.php",
 		"oF": 0
 		},
+	"\/partials\/theme\/social-share.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/partials\/theme\/social-share.php",
+		"oF": 0
+		},
 	"\/screenshot.png": {
 		"ft": 32768,
 		"iS": 21944,

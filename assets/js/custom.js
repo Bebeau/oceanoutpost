@@ -180,12 +180,34 @@ var init = {
     	jQuery('#blogListing .video').click(function(e){
     		e.preventDefault();
     		var vidID = jQuery(this).attr("data-vid");
-    		jQuery('#videoModal').append('<iframe width="100%" height="140" src="https://www.youtube.com/embed/'+vidID+'?autoplay=1" frameborder="0" allowfullscreen showinfo="0"></iframe>');
-    		jQuery('#videoModal').addClass("in");
+    		jQuery('#videoModal article').append('<iframe width="100%" height="420" src="https://www.youtube.com/embed/'+vidID+'?autoplay=1" frameborder="0" allowfullscreen showinfo="0"></iframe>');
+    		jQuery('body').addClass("freeze");
+    		setTimeout(
+    			function(){
+    				jQuery('#videoModal').addClass("in");
+    			},500
+			);
+			setTimeout(
+    			function(){
+    				jQuery('.closeModal').addClass("in");
+    			},1200
+			);
     	});
-    	jQuery('.modalClose').click(function(e){
+    	jQuery('.closeModal').click(function(e){
     		e.preventDefault();
-    		jQuery('#videoModal').removeClass("in");
+    		jQuery(this).removeClass("in");
+    		setTimeout(
+    			function(){
+    				jQuery('#videoModal').removeClass("in");
+    			},500
+			);
+			setTimeout(
+    			function(){
+    				jQuery('#videoModal iframe').remove();
+    			},1200
+			);
+			jQuery('body').removeClass("freeze");
+    		return false;
     	});
     },
     blogScroll: function() {
