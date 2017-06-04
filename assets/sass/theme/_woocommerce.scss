@@ -22,6 +22,9 @@
 	}
 }
 .single-product {
+	.woocommerce-error {
+		margin-top: 50px;
+	}
 	#sidebar {
 		display: none;
 	}
@@ -269,14 +272,15 @@
 		i {
 			font-size: 16pt;
 			margin-right: 10px;
+			line-height: 35px;
 		}
 		.widget {
 			display: inline-block;
+			vertical-align: top;
 			select {
 				line-height: 40px;
 				height: 40px;
 				background: white;
-				border: 0;
 				margin: 0 5px;
 				font-size: 12pt;
 				letter-spacing: 1px;
@@ -284,7 +288,6 @@
 				font-family: 'din light', sans-serif;
 				@include border-top-radius(0);
 				@include border-bottom-radius(0);
-				outline: 1px solid #CCC;
 				&:hover {
 					cursor: pointer;
 				}
@@ -688,6 +691,7 @@
 	vertical-align: top;
 	#payment {
 		background-color: $lightgrey;
+		margin-bottom: 35px;
 		div.payment_box {
 			p:last-child {
 				margin: 0;
@@ -803,6 +807,7 @@
 			margin-top: 25px;
 			box-sizing: border-box;
 			padding: 25px;
+			margin-bottom: 35px;
 			h3 {
 				&#ship-to-different-address {
 					text-align: center;

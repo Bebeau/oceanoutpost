@@ -2,7 +2,6 @@
 	<?php 
 		if(is_shop() || is_product_category()) {
 			echo '<i class="fa fa-sliders"></i>';
-			do_action( 'woocommerce_before_shop_loop' );
 		    if (function_exists('dynamic_sidebar') && dynamic_sidebar('Shop Widgets'));
 		} else {
 			$news_image = get_option('news_image');

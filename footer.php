@@ -129,8 +129,5 @@
     
 	</body>
 </html>
-<!-- WP Generated Header
-================================================== --> 
-<?php wp_head(); ?>
 
 <?php wp_footer(); ?>  

@@ -265,6 +265,7 @@ function youtube_video_link() {
 <?php 
 }
 // save video link
+add_action( 'save_post', 'youtube_video_link_save' );
 function youtube_video_link_save( $post_id ) {
     // Checks save status
     $is_autosave = wp_is_post_autosave( $post_id );
@@ -285,7 +286,13 @@ function youtube_video_link_save( $post_id ) {
         update_post_meta( $post_id, 'video_link', $videoID );
     }
 }
-add_action( 'save_post', 'youtube_video_link_save' );
+// ajax response to display random winner
+add_action('wp_ajax_VideoRemove', 'VideoRemove');
+add_action('wp_ajax_nopriv_VideoRemove', 'VideoRemove');
+function VideoRemove() {
+    $postID = (isset($_GET['postID'])) ? $_GET['postID'] : 0;
+    update_post_meta( $postID, 'video_link', '' );
+}
 
 // Custom Scripting to Move JavaScript from the Head to the Footer
 function remove_head_scripts() { 
@@ -311,11 +318,21 @@ if ( function_exists('register_sidebar') ) {
         'before_title'  => '<h3 class="widgettitle">',
         'after_title'   => '</h3>',)
     );
+    register_sidebar(array(
+        'name'          => 'Blog Widgets',
+        'id'            => 'blog-widgets',
+        'description'   => '',
+        'class'         => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widgettitle">',
+        'after_title'   => '</h3>',)
+    );
 }
 
-add_action('wp_ajax_ajaxBlog', 'addPosts');
-add_action('wp_ajax_nopriv_ajaxBlog', 'addPosts');
-function addPosts() {
+add_action('wp_ajax_ajaxShop', 'addProducts');
+add_action('wp_ajax_nopriv_ajaxShop', 'addProducts');
+function addProducts() {
     global $post;
 
     $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
@@ -336,6 +353,42 @@ function addPosts() {
     while ($results->have_posts()) : $results->the_post();
         
         woocommerce_get_template_part( 'content', 'product' );
+
+    endwhile; endif;
+
+    wp_reset_query();
+
+    exit;
+
+}
+
+add_action('wp_ajax_ajaxBlog', 'addBlogPosts');
+add_action('wp_ajax_nopriv_ajaxBlog', 'addBlogPosts');
+function addBlogPosts() {
+    global $post;
+
+    $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+    // $cat = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
+
+    $args = array(
+        'paged' => $page,
+        'orderby' => 'asc',
+        'post_type' => 'post',
+        'posts_per_page' => 16,
+        'post_status' => 'publish'
+    );
+
+    $results = new WP_Query($args);
+
+    if ($results->have_posts()) :
+    
+    while ($results->have_posts()) : $results->the_post();
+        
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' );
+        echo '<a href="'.get_the_permalink().'">';
+            echo '<article style="background: url('.$image[0].') no-repeat scroll center / cover;"></article>';
+            the_title("<h3>","</h3>");
+        echo '</a>';
 
     endwhile; endif;
 

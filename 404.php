@@ -1,11 +1,8 @@
-<?php get_header(); ?>
+<?php get_header();
+	
+	echo '<section id="errorPage">';
+		echo '<h1>Oops, something went wrong.</h1>';
+		echo '<p>We&#39;re sorry. We can&#39;t seem to find what you&#39;re looking for.</p>';
+	echo '</section>';
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				Ops, something went wrong.
-			</div>
-		</div>
-	</div>
-
-<?php get_footer(); ?>
+get_footer(); ?>

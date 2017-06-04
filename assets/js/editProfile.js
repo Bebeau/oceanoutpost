@@ -3,6 +3,7 @@ var user = {
 		user.imageUploader();
 		user.removeImage();
 		user.onKeyUp();
+		user.removeButton();
 	},
 	imageUploader: function() {
 		var meta_image_frame;
@@ -101,7 +102,34 @@ var user = {
 	            }
 	        });
 		});
-	}
+	},
+	removeURL: function(postID) {
+        jQuery.ajax({
+            url: ajaxurl,
+            type: "GET",
+            data: {
+                action: 'VideoRemove',
+                postID: postID
+            },
+            dataType: 'html',
+            success: function(response){
+                jQuery('#video iframe').remove();
+                jQuery('.remove-btn').remove();
+                jQuery('#video_link').attr("type", "text");
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                window.alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+            }
+        }); 
+    },
+    removeButton: function() {
+    	jQuery(".remove-btn").click(function(e){
+	        e.preventDefault();
+	        jQuery('#video_link').val("");
+	        var postID = jQuery(this).attr("data-post");
+	        user.removeURL(postID);
+	    });
+    }
 };
 jQuery(document).ready(function() {
 	user.onReady();

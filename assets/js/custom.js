@@ -14,12 +14,27 @@ var init = {
 		init.tabs();
 		init.instafeed();
 		init.shopScroll();
+		init.blogScroll();
         init.scooch();
         init.singleProduct();
+        init.blogModal();
 	},
 	preLoad: function() {
         jQuery(window).load(function() {
+        	// fade out loader
             jQuery("#loader").fadeOut(); 
+            // fade in products
+            jQuery('.type-product').each(function(index) {
+	           jQuery(this).delay(50*index).queue(function(){
+	                jQuery(this).addClass("load");
+	            });
+	        });
+	        // fade in blog posts
+            jQuery('#blogListing a').each(function(index) {
+	           jQuery(this).delay(50*index).queue(function(){
+	                jQuery(this).addClass("load");
+	            });
+	        });
         });
     },
 	singleProduct: function() {
@@ -40,7 +55,7 @@ var init = {
 				function(){
 					var image = jQuery('.mainimagewrap').parent().attr("href");
 					jQuery(".zoomImg").attr("src", image);
-				},250
+				}, 250
 			);
 		});
 	},
@@ -89,11 +104,6 @@ var init = {
 		});
 	},
 	shopScroll: function () {
-		jQuery('.type-product').each(function(index) {
-           jQuery(this).delay(100*index).queue(function(){
-                jQuery(this).addClass("load");
-            });
-        });
         if(jQuery('body').hasClass('archive')) {
             if(jQuery('body').hasClass('tax-product_cat')) {
                 var cat = location.href.match(/([^\/]*)\/*$/)[1];
@@ -123,7 +133,7 @@ var init = {
             url: ajax.ajaxurl,
             type: "post",
             data: {
-            	action: 'ajaxBlog',
+            	action: 'ajaxShop',
                 cat: cat,
             	pageNumber: ajax.page
             },
@@ -166,9 +176,76 @@ var init = {
             }
         });
     },
-	newsletterBtn: function() {
-		jQuery('#newsletterFrm').submit(init.newsletterSubmit);
-	},
+    blogModal: function() {
+    	jQuery('#blogListing .video').click(function(e){
+    		e.preventDefault();
+    		var vidID = jQuery(this).attr("data-vid");
+    		jQuery('#videoModal').append('<iframe width="100%" height="140" src="https://www.youtube.com/embed/'+vidID+'?autoplay=1" frameborder="0" allowfullscreen showinfo="0"></iframe>');
+    		jQuery('#videoModal').addClass("in");
+    	});
+    	jQuery('.modalClose').click(function(e){
+    		e.preventDefault();
+    		jQuery('#videoModal').removeClass("in");
+    	});
+    },
+    blogScroll: function() {
+    	if(jQuery('body').hasClass('blog')) {
+	    	jQuery(window).scroll( function() {
+	            var totalHeight = (jQuery(window).scrollTop() + jQuery(window).height());
+	            var contentHeight = (jQuery("#blogListing").scrollTop() + jQuery("#blogListing").height() - 500);
+	            if(!ajax.loading && totalHeight > contentHeight) {
+	                ajax.loading = true;
+	                init.blogAjax();
+	            }
+	        });
+	    }
+    },
+    blogAjax: function() {
+        jQuery.ajax({
+            url: ajax.ajaxurl,
+            type: "post",
+            data: {
+            	action: 'ajaxBlog',
+            	pageNumber: ajax.page
+            },
+            dataType: "html",
+            beforeSend : function(){
+                if(ajax.page !== 1){
+                    jQuery("#blogListing").append('<div id="temp_load"><i class="fa fa-spinner fa-spin"></i></div>');
+                }
+                ajax.loading = true;
+            },
+            success : function(data){
+                var $data = jQuery(data);
+                // add counts
+                ajax.page++;
+                if($data.length && ajax.page > 1){
+                    // hide response data
+                    $data.hide();
+                    // add data to #blog-listing #content
+                    jQuery("#blogListing").append($data);
+                    // fade response data in
+                    $data.fadeIn(200, function(){
+                        jQuery("#temp_load").remove();
+                        ajax.loading = false;
+                    });
+                    // progresively bubble in new posts
+                    $data.each(function(index) {
+                       	jQuery(this).delay(50*index).queue(function(){
+                            jQuery(this).addClass("load");
+                        });
+                    });
+                } else {
+                    // remove loader
+                    jQuery("#temp_load").remove();
+                }
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                jQuery("#temp_load").remove();
+                window.alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+            }
+        });
+    }
 };
 
 jQuery(document).ready(function() {

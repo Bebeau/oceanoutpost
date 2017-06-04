@@ -85,6 +85,10 @@
 		<meta property="twitter:url" content="<?php the_permalink() ?>" />
 		<meta property="twitter:domain" content="<?php echo site_url(); ?>">
 	<?php } ?>
+
+	<!-- WP Generated Header
+	================================================== --> 
+	<?php wp_head(); ?>
     
 </head>
 

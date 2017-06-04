@@ -3,7 +3,11 @@
 		if (have_posts()) : while (have_posts()) : the_post();
 			the_title("<h1>","</h1>");
 			echo '<section class="copy">';
-					the_content();
+				$vid = get_post_meta($post->ID, 'video_link', true);
+				if(!empty($vid)) {
+					echo '<iframe width="100%" height="480" src="https://www.youtube.com/embed/'.$vid.'" frameborder="0" allowfullscreen showinfo="0"></iframe>';	
+				}
+				the_content();
 			echo '</section>';
 		endwhile;
 		endif;
