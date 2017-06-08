@@ -4,10 +4,11 @@
 add_filter('show_admin_bar', '__return_false');
 
 // remove default woocommerce styles
-add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+// add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 // Load all styles and scripts for the site
 if (!function_exists( 'load_custom_scripts' ) ) {
+    add_action( 'wp_print_styles', 'load_custom_scripts' );
 	function load_custom_scripts() {
 		// Styles
 		wp_enqueue_style( 'Style CSS', get_bloginfo( 'template_url' ) . '/style.css', false, '', 'all' );
@@ -27,9 +28,9 @@ if (!function_exists( 'load_custom_scripts' ) ) {
         ));
 	}
 }
-add_action( 'wp_print_styles', 'load_custom_scripts' );
 
 // Add admin styles for login page customization
+add_action( 'admin_enqueue_scripts', 'load_admin_scripts' );
 function load_admin_scripts() {
     wp_enqueue_style( 'admin-styles', get_bloginfo( 'template_url' ) . '/assets/css/admin.css', false, '', 'all' );
     wp_enqueue_script('jquery_ui', 'https://code.jquery.com/ui/1.11.4/jquery-ui.js', array('jquery'), null, true);
@@ -46,7 +47,6 @@ function load_admin_scripts() {
     wp_enqueue_script( 'admin_script' );
 
 }
-add_action( 'admin_enqueue_scripts', 'load_admin_scripts' );
 
 // add woocommerce theme support
 add_action( 'after_setup_theme', 'woocommerce_support' );
@@ -54,6 +54,11 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 add_filter( 'woocommerce_ship_to_different_address_checked', '__return_false' );
+
+add_action( 'woocommerce_product_meta_start', 'social_share' );
+function social_share() {
+    get_template_part( 'partials/theme/social', 'share' );
+}
 
 add_action( 'woocommerce_share', 'after_add_to_cart_button' );
 function after_add_to_cart_button() {
@@ -86,7 +91,6 @@ function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['additional_information'] );
     return $tabs;
 }
-
 
 // Thumbnail Support
 add_theme_support( 'post-thumbnails', array('post') );
@@ -336,15 +340,37 @@ function addProducts() {
     global $post;
 
     $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
-    // $cat = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
+    $cat = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
 
-    $args = array(
-        'paged' => $page,
-        'orderby' => 'asc',
-        'post_type' => array("product"),
-        'posts_per_page' => 16,
-        'post_status' => 'publish'
-    );
+    if(!empty($cat)) {
+
+        $terms = get_term_by('slug', $cat, 'product_cat');
+        $catID = $terms->term_id;
+
+        $args = array(
+            'paged' => $page,
+            'post_type' => 'product',
+            'posts_per_page' => 12,
+            'post_status' => 'publish',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'id',
+                    'terms' => $catID,
+                    'include_children' => true,
+                    'operator' => 'IN'
+                )
+            )
+        );
+
+    } else {
+        $args = array(
+            'paged' => $page,
+            'post_type' => 'product',
+            'posts_per_page' => 12,
+            'post_status' => 'publish'
+        );
+    }
 
     $results = new WP_Query($args);
 

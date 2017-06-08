@@ -291,6 +291,9 @@
 				&:hover {
 					cursor: pointer;
 				}
+				&:focus {
+					outline: none;
+				}
 			}
 		}
 	}
@@ -467,6 +470,16 @@
 					.sku_wrapper {
 						border-top: 1px solid $lightgrey;
 						padding-top: 15px;
+					}
+					.social-share {
+						text-align: left;
+						margin-bottom: 25px;
+						.share-text {
+							font-size: 12pt;
+						}
+						i {
+							text-align: center;
+						}
 					}
 				}
 				#productTrust {
