@@ -18,6 +18,7 @@ var init = {
         init.scooch();
         init.singleProduct();
         init.blogModal();
+        init.frmBtn();
 	},
 	preLoad: function() {
         jQuery(window).load(function() {
@@ -285,7 +286,54 @@ var init = {
                 window.alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
             }
         });
-    }
+    },
+    contactSubmit: function() {
+		var Frm = jQuery('#contactfrm');
+    	jQuery('#contactfrm .btn-submit').html('<i class="fa fa-spinner fa-spin"></i>');
+        jQuery.ajax({
+            url: ajax.ajaxurl,
+            type: Frm.attr('method'),
+            data: {
+            	firstname: jQuery('#fname').val(),
+            	lastname: jQuery('#lname').val(),
+            	emailaddress: jQuery('#emailaddress').val(),
+            	message: jQuery('#message').val(),
+            	action: 'sendContact'
+            },
+            dataType: 'html',
+            beforeSubmit : function(arr, $form, options) {
+	            arr.push( { "name" : "nonce", "value" : meta.nonce });
+	        },
+            success: function(data) {
+            	init.contactResponse(data);
+            }
+        });
+        return false;
+	},
+	contactResponse: function(response) {
+        jQuery('#contactfrm .btn-submit i').remove();
+        if (response === "Success") {
+        	jQuery('#contactfrm .btn-submit').replaceWith('<button class="button btn-submit success"><i class="fa fa-check"></i></button>');
+            jQuery("input").val("");
+            jQuery("textarea").val("");
+            setTimeout(
+            	function() {
+            		jQuery('#contactfrm .btn-submit').replaceWith('<button class="button btn-submit">Send Message</button>');
+            	}, 2500
+        	);
+        }
+        if (response === "E") {
+         	jQuery('#contactfrm .btn-submit').replaceWith('<button class="button btn-submit error"><i class="fa fa-ban"></i></button>');
+         	setTimeout(
+            	function() {
+            		jQuery('#contactfrm .btn-submit').replaceWith('<button class="button btn-submit">Send Message</button>');
+            	}, 2500
+        	);
+        }
+	},
+	frmBtn: function() {
+		jQuery('#contactfrm').submit(init.contactSubmit);
+	}
 };
 
 jQuery(document).ready(function() {

@@ -452,6 +452,53 @@ function socialShare() {
     echo $share;
 }
 
+add_action('wp_ajax_sendContact', 'emailSubmit');
+add_action('wp_ajax_nopriv_sendContact', 'emailSubmit');
+function emailSubmit() {
+    global $post;
+    if( empty($_POST['password']) ) {
+
+        $success = false;
+
+        $firstname = isset( $_POST['firstname'] ) ? $_POST['firstname'] : "";
+        $lastname = isset( $_POST['lastname'] ) ? $_POST['lastname'] : "";
+        $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
+        $message = isset( $_POST['message'] ) ? $_POST['message'] : "";
+
+        $email = esc_attr(get_option('admin_email'));
+        $to = $firstname.' '.$lastname.' <'.$emailaddress.'>';
+
+        if ( $firstname && $lastname && $emailaddress && $message ) {
+
+            $subject = "Wyzerr Contact Lead";
+
+            $headers = 'From:' . $email . "\r\n";
+            $headers .= 'Reply-To:' . $to . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html\r\n";
+            $headers .= "charset: ISO-8859-1\r\n";
+            $headers .= "X-Mailer: PHP/".phpversion()."\r\n";
+
+            $formcontent = '<html><body><center>';
+                $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
+                $formcontent .= "<tr><td><strong>Name:</strong></td><td>" . $firstname .' '. $lastname . "</td></tr>";
+                $formcontent .= "<tr><td><strong>Email:</strong></td><td>" . $emailaddress . "</td></tr>";
+                $formcontent .= "<tr><td><strong>Message:</strong></td><td>" . $message . "</td></tr>";
+            $formcontent .= '</table></center></body></html>';
+
+            $success = mail( $email, $subject, $formcontent, $headers );
+
+        }
+
+        // Return an appropriate response to the browser
+        if ( defined( 'DOING_AJAX' ) ) {
+            echo $success ? "Success" : "E";
+        }
+    }
+    die();
+
+}
+
 include(TEMPLATEPATH.'/partials/functions/theme.php');
 
 // add random string generator

@@ -549,6 +549,15 @@ header {
 				@include transform(translate(0,0));
 				@include border-top-radius(0);
 				@include border-bottom-radius(0);
+				&:focus {
+					outline: none;
+				}
+				&.success {
+					background: $green;
+				}
+				&.error {
+					background: $red;
+				}
 			}
 			#security {
 				display: none;
