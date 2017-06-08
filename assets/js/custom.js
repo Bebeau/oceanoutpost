@@ -104,38 +104,44 @@ var init = {
 			jQuery('#tabListing article[data-tab="'+tab+'"]').addClass("active");
 		});
 	},
+	getUrlVars: function() {
+		var vars = [], hash;
+	    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	    for(var i = 0; i < hashes.length; i++)
+	    {
+	        hash = hashes[i].split('=');
+	        vars.push(hash[0]);
+	        vars[hash[0]] = hash[1];
+	    }
+	    return vars;
+	},
 	shopScroll: function () {
         if(jQuery('body').hasClass('archive')) {
-            if(jQuery('body').hasClass('tax-product_cat')) {
-                var cat = location.href.match(/([^\/]*)\/*$/)[1];
-                jQuery(window).scroll( function() {
-                    var totalHeight = (jQuery(window).scrollTop() + jQuery(window).height());
-                    var contentHeight = (jQuery("ul.products").scrollTop() + jQuery("ul.products").height() - 500);
-                    if(!ajax.loading && totalHeight > contentHeight) {
-                        ajax.loading = true;
-                        init.shopAjax(cat);
-                    }
-                });
-            } else {
-                jQuery(window).scroll( function() {
-                    var totalHeight = (jQuery(window).scrollTop() + jQuery(window).height());
-                    var contentHeight = (jQuery("ul.products").scrollTop() + jQuery("ul.products").height() - 500);
-                    if(!ajax.loading && totalHeight > contentHeight) {
-                        ajax.loading = true;
-                        init.shopAjax();
-                    }
-                });
-            }
+
+		    var color = init.getUrlVars()["filter_color"];
+			var size = init.getUrlVars()["filter_size"];
+			var cat = jQuery( ".dropdown_product_cat option:selected" ).val();
+
+            jQuery(window).scroll( function() {
+                var totalHeight = (jQuery(window).scrollTop() + jQuery(window).height());
+                var contentHeight = (jQuery("ul.products").scrollTop() + jQuery("ul.products").height() - 500);
+                if(!ajax.loading && totalHeight > contentHeight) {
+                    ajax.loading = true;
+                    init.shopAjax(cat,color,size);
+                }
+            });
 
         }
     },
-	shopAjax: function(cat) {
+	shopAjax: function(cat,color,size) {
         jQuery.ajax({
             url: ajax.ajaxurl,
             type: "post",
             data: {
             	action: 'ajaxShop',
                 cat: cat,
+                color: color,
+                size: size,
             	pageNumber: ajax.page
             },
             dataType: "html",

@@ -385,7 +385,10 @@ function addProducts() {
     global $post;
 
     $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+    
     $cat = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
+    $color = (isset($_POST['color'])) ? $_POST['color'] : 0;
+    $size = (isset($_POST['size'])) ? $_POST['size'] : 0;
 
     if(!empty($cat)) {
 
