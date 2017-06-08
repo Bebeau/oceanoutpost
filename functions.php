@@ -78,6 +78,7 @@ function after_add_to_cart_button() {
     echo '<img id="globalsign" src="'.get_bloginfo('template_directory').'/assets/images/globalsign.png" alt="" />';
 
 }
+
 if ( !wp_is_mobile() ) {
     remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
     add_action( 'woocommerce_product_thumbnails', 'add_woo_tabs', 30 );
@@ -296,6 +297,50 @@ add_action('wp_ajax_nopriv_VideoRemove', 'VideoRemove');
 function VideoRemove() {
     $postID = (isset($_GET['postID'])) ? $_GET['postID'] : 0;
     update_post_meta( $postID, 'video_link', '' );
+}
+
+add_action( 'add_meta_boxes', 'custom_product_label_meta', 1 );
+function custom_product_label_meta() {
+    add_meta_box(
+        'product',
+        'Custom Product Label', 
+        'custom_product_label', 
+        'product',
+        'side', 
+        'high'
+    );
+}
+function custom_product_label() {
+    global $post;
+    wp_nonce_field( basename( __FILE__ ), 'custom_product_label' );
+    $label = get_post_meta( $post->ID, 'custom_label', true );
+    if(!empty($label)) {
+        echo '<input type="text" name="custom_label" id="custom_label" value="'.$label.'"/>';
+    } else {
+        echo '<input type="text" name="custom_label" id="custom_label" value=""/>';
+    }
+}
+// save video link
+add_action( 'save_post', 'custom_product_label_save' );
+function custom_product_label_save( $post_id ) {
+    // Checks save status
+    $is_autosave = wp_is_post_autosave( $post_id );
+    $is_revision = wp_is_post_revision( $post_id );
+    $is_valid_nonce = ( isset( $_POST[ 'video_link' ] ) && wp_verify_nonce( $_POST[ 'youtube_video_link' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+    // Exits script depending on save status
+    if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+        return;
+    }
+    // Checks for input and sanitizes/saves if needed
+    if( isset( $_POST[ 'custom_label' ] )) {
+        update_post_meta( $post_id, 'custom_label', $_POST[ 'custom_label' ] );
+    }
+}
+add_action( 'woocommerce_before_shop_loop_item_title', 'oo_custom_label' );
+function oo_custom_label() {
+    global $post;
+    $label = get_post_meta( $post->ID, 'custom_label', true );
+    echo '<div class="custom_label">'.$label.'</div>';
 }
 
 // Custom Scripting to Move JavaScript from the Head to the Footer

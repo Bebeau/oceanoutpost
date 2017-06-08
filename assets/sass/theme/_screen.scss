@@ -571,6 +571,15 @@ header {
 		}
 	}
 }
+.custom_label {
+	background: $teal;
+	color: white;
+	text-align: center;
+	display: block;
+	line-height: 30px;
+	font-family: 'din light';
+	margin-bottom: 10px;
+}
 #instafeed {
 	margin: 0 0 -6px 0;
 	a {
