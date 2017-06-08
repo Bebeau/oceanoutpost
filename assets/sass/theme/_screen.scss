@@ -616,7 +616,7 @@ header {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(68,68,68,0.9);
+	background: rgba(68,68,68,0.95);
 	z-index: 9;
 	text-align: center;
 	@include transform(translate(0,-100%));
@@ -657,20 +657,46 @@ header {
 		}
 	}
 	.social-share {
-		display: block;
-		position: absolute;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		font-size: 36pt;
 		color: white;
-		z-index: 99;
-		@include transform(rotate(0));
 		@include transition(all 0.3s $authenticMotion);
+		@include transform(translate(0,-125px));
 		&.in {
-			bottom: -100px;
-			@include transform(rotate(180deg));
+			@include transform(translate(0,0));
 			@include transition(all 0.3s $authenticMotion);
+		}
+	}
+}
+.social-share {
+	display: block;
+	bottom: 0;
+	font-size: 18pt;
+	z-index: 99;
+	color: $grey;
+	text-align: center;
+	margin-bottom: 50px;
+	.share-text {
+		margin: 10px 0;
+		font-size: 18pt;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	i {
+		font-size: 18pt;
+		color: white;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		margin: 0 2px;
+		@include border-top-radius(50%);
+		@include border-bottom-radius(50%);
+		&.fa-facebook {
+			background: $facebook;
+		}
+		&.fa-twitter {
+			background: $twitter;
+		}
+		&.fa-pinterest {
+			background: $pinterest;
 		}
 		&:hover {
 			cursor: pointer;
@@ -713,6 +739,8 @@ header {
 					text-align: center;
 					line-height: 50px;
 					margin: 0 auto;
+					position: relative;
+					padding-left: 3px;
 					@include border-top-radius(50%);
 					@include border-bottom-radius(50%);
 				}
@@ -727,12 +755,6 @@ header {
 			font-family: 'Shadows Into Light', cursive;
 			text-align: center;
 			margin-top: 5px;
-		}
-		&:hover {
-			article {
-				.playwrap {
-				}
-			}
 		}
 	}
 }

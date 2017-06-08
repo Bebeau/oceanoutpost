@@ -398,6 +398,34 @@ function addBlogPosts() {
 
 }
 
+add_action('wp_ajax_ajaxShare', 'socialShare');
+add_action('wp_ajax_nopriv_ajaxShare', 'socialShare');
+function socialShare() {
+    $postID = (isset($_POST['postID'])) ? $_POST['postID'] : 0;
+
+    if(has_post_thumbnail($postID)) {
+        $postImage = wp_get_attachment_image_url(get_post_thumbnail_id($postID), 'large', false ); 
+    } else { 
+        $postImage = get_bloginfo('template_directory').'/assets/images/default_facebook.jpg'; 
+    };
+
+    $share = '';
+    $share .= '<div class="social-share">';
+        $share .= '<div class="share-text">Share with your friends &amp; followers!</div>';
+        $share .= '<a class="facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='.get_the_permalink($postID).'">';
+            $share .= '<i class="fa fa-facebook"></i>';
+        $share .= '</a>';
+        $share .= '<a class="twitter" target="_blank" href="http://twitter.com/share?url='.get_the_permalink($postID).'&amp;text=Satisfy your salt craving - &amp;via=oceanoutpost">';
+            $share .= '<i class="fa fa-twitter"></i>';
+        $share .= '</a>';
+        $share .= '<a target="_blank" href="http://pinterest.com/pin/create/button/?url='.get_the_permalink($postID).'&amp;media='.$postImage.'&amp;description=<?php echo strip_tags(get_the_excerpt()); ?>" class="pinterest" count-layout="horizontal">';
+            $share .= '<i class="fa fa-pinterest"></i>';
+        $share .= '</a>';
+    $share .= '</div>';
+
+    echo $share;
+}
+
 include(TEMPLATEPATH.'/partials/functions/theme.php');
 
 // add random string generator

@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-	<h1>Blog - <?php single_cat_title(); ?></h1>
+	<h1><?php single_cat_title(); ?></h1>
 	<?php 
 
 	echo '<section id="videoModal" class="outer">';

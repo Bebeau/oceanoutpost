@@ -179,32 +179,50 @@ var init = {
     blogModal: function() {
     	jQuery('#blogListing .video').click(function(e){
     		e.preventDefault();
+    		
+    		var postID = jQuery(this).attr("data-id");
+    		jQuery.ajax({
+	            url: ajax.ajaxurl,
+	            type: "post",
+	            data: {
+	            	action: 'ajaxShare',
+	                postID: postID
+	            },
+	            dataType: "html",
+	            success : function(data){
+	            	jQuery('#videoModal article').append(data);
+	            }
+	        });
+
     		var vidID = jQuery(this).attr("data-vid");
-    		jQuery('#videoModal article').append('<iframe width="100%" height="420" src="https://www.youtube.com/embed/'+vidID+'?autoplay=1" frameborder="0" allowfullscreen showinfo="0"></iframe>');
+    		jQuery('#videoModal article').prepend('<iframe width="100%" height="420" src="https://www.youtube.com/embed/'+vidID+'?autoplay=1" frameborder="0" allowfullscreen showinfo="0"></iframe>');
     		jQuery('body').addClass("freeze");
     		setTimeout(
     			function(){
     				jQuery('#videoModal').addClass("in");
-    			},500
+    			}, 500
 			);
 			setTimeout(
     			function(){
     				jQuery('.closeModal').addClass("in");
-    			},1200
+    				jQuery('.social-share').addClass("in");
+    			}, 1200
 			);
     	});
     	jQuery('.closeModal').click(function(e){
     		e.preventDefault();
     		jQuery(this).removeClass("in");
+    		jQuery('.social-share').removeClass("in");
     		setTimeout(
     			function(){
     				jQuery('#videoModal').removeClass("in");
-    			},500
+    			}, 500
 			);
 			setTimeout(
     			function(){
     				jQuery('#videoModal iframe').remove();
-    			},1200
+    				jQuery('.social-share').remove();
+    			}, 1200
 			);
 			jQuery('body').removeClass("freeze");
     		return false;
