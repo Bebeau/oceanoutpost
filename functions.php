@@ -94,7 +94,7 @@ function woo_remove_product_tabs( $tabs ) {
 }
 
 // Thumbnail Support
-add_theme_support( 'post-thumbnails', array('post') );
+add_theme_support( 'post-thumbnails', array('post', 'product') );
 
 // Register Navigation Menu Areas
 add_action( 'after_setup_theme', 'register_my_menu' );
@@ -108,19 +108,6 @@ function register_my_menu() {
     register_nav_menu( 'customer-service-menu', 'Customer Service Menu' );
     // mobile menus
     register_nav_menu( 'mobile-menu', 'Mobile Menu' );
-}
-
-// remove WordPress admin menu items
-add_action( 'admin_menu', 'remove_menus' );
-function remove_menus(){
-    // remove_menu_page( 'edit.php' );
-    // remove_menu_page( 'edit.php?post_type=page' );
-    // remove_menu_page( 'edit-comments.php' );
-    // remove_menu_page( 'tools.php' );
-    // remove_menu_page( 'themes.php' );
-    // remove_menu_page( 'plugins.php' );
-    // remove_menu_page( 'users.php' );
-    // remove_menu_page( 'upload.php' );
 }
 
 // Load widget areas
