@@ -7,14 +7,8 @@
 		"uuidString": "D9607150-AAFD-4434-80F4-4320BBCA3781"
 		}
 	],
-"creatorBuild": "25813",
+"creatorBuild": "25849",
 "files": {
-	"\/.gitignore": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/.gitignore",
-		"oF": 0
-		},
 	"\/404.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -27,20 +21,10 @@
 		"oAP": "\/archive.php",
 		"oF": 0
 		},
-	"\/assets\/css\/admin.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/assets\/css\/admin-min.css",
-		"oF": 0,
-		"oS": 0
-		},
-	"\/assets\/fonts\/Cocogoose.otf": {
+	"\/assets\/fonts\/cocogoose.otf": {
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/assets\/fonts\/Cocogoose.otf",
+		"oAP": "\/assets\/fonts\/cocogoose.otf",
 		"oF": 0
 		},
 	"\/assets\/fonts\/DIN_Light.otf": {
@@ -302,6 +286,16 @@
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
+		"q": 100
+		},
+	"\/assets\/images\/sizechart.jpg": {
+		"ft": 16384,
+		"iS": 94087,
+		"oA": 0,
+		"oAP": "\/assets\/images\/sizechart.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
 		"q": 100
 		},
 	"\/assets\/js\/custom.js": {
@@ -2272,7 +2266,7 @@
 	},
 "projectAttributes": {
 	"creationDate": 511895510,
-	"displayValue": "oceanoutpost",
+	"displayValue": "oceanoutpost2",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-greg"
 	},
@@ -4210,6 +4204,7 @@
 		},
 	"languageDefaultsUserDefined": [
 		],
+	"overrideExternalServerCSS": 0,
 	"previewPathAddition": "",
 	"skippedFoldersString": "log, _logs, logs, _cache, cache, \/storage\/framework\/sessions, node_modules",
 	"sourceFolderName": "source",

@@ -3,7 +3,6 @@
 	echo '<section id="videoModal" class="outer">';
 		echo '<article class="inner">';
 			echo '<i class="closeModal fa fa-times"></i>';
-			// get_template_part( 'partials/theme/social', 'share' );
 		echo '</article>';
 	echo '</section>';
 

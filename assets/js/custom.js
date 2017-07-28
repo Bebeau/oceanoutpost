@@ -186,6 +186,12 @@ var init = {
     blogModal: function() {
     	jQuery('#blogListing .video').click(function(e){
     		e.preventDefault();
+
+    		if(jQuery(document).scrollTop() < jQuery('header').prop('scrollHeight')) {
+				jQuery('body').animate({
+			        scrollTop: jQuery('header').prop('scrollHeight')
+			    });
+			}
     		
     		var postID = jQuery(this).attr("data-id");
     		jQuery.ajax({

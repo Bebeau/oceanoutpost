@@ -5,6 +5,17 @@
 .woocommerce-pagination, .woocommerce-ordering, .woocommerce-breadcrumb, .woocommerce-result-count {
 	display: none;
 }
+.woocommerce div.product form.cart {
+	margin-bottom: 1em;
+}
+.woocommerce {
+	.product_meta {
+		.sizechart {
+			margin-bottom: 25px;
+			display: block;
+		}
+	}
+}
 #temp_load {
 	&:before {
 		content:"";

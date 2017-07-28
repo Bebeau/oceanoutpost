@@ -57,6 +57,7 @@ add_filter( 'woocommerce_ship_to_different_address_checked', '__return_false' );
 
 add_action( 'woocommerce_product_meta_start', 'social_share' );
 function social_share() {
+    echo '<a class="sizechart">View Size Chart</a>';
     get_template_part( 'partials/theme/social', 'share' );
 }
 
@@ -483,8 +484,6 @@ function socialShare() {
             $share .= '<i class="fa fa-pinterest"></i>';
         $share .= '</a>';
     $share .= '</div>';
-
-    echo $share;
 }
 
 add_action('wp_ajax_sendContact', 'emailSubmit');
@@ -505,7 +504,7 @@ function emailSubmit() {
 
         if ( $firstname && $lastname && $emailaddress && $message ) {
 
-            $subject = "Wyzerr Contact Lead";
+            $subject = "Ocean Outpost Contact Form";
 
             $headers = 'From:' . $email . "\r\n";
             $headers .= 'Reply-To:' . $to . "\r\n";
