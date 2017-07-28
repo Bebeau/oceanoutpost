@@ -111,7 +111,7 @@
 				 		wp_nav_menu($menu_args);
 				 	?>
 				</article>
-				<article>
+				<article id="secure">
 					<h4>Secure Shopping Guaranteed</h4>
 					<img src="<?php bloginfo('template_directory'); ?>/assets/images/payment.jpg" alt="" />
 					<!-- godaddy seal -->

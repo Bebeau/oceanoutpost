@@ -19,9 +19,9 @@ var init = {
         init.singleProduct();
         init.blogModal();
         init.frmBtn();
-        init.sizechart();
+        init.menuToggle();
 	},
-	sizechart: function() {
+	menuToggle: function() {
 		jQuery('#sizechart button').click(function(e){
 			e.preventDefault();
 			jQuery(this).toggleClass('open');
@@ -29,6 +29,17 @@ var init = {
 				jQuery('#sizechart img').slideDown();
 			} else {
 				jQuery('#sizechart img').slideUp();
+			}
+		});
+		jQuery('footer h4').click(function(e){
+			e.preventDefault();
+
+			if(jQuery(this).parent().hasClass('open')) {
+				jQuery(this).next().slideUp();
+				jQuery(this).parent().removeClass('open');
+			} else {
+				jQuery(this).next().slideDown();
+				jQuery(this).parent().addClass('open');
 			}
 		});
 	},
