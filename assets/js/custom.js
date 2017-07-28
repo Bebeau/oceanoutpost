@@ -19,6 +19,18 @@ var init = {
         init.singleProduct();
         init.blogModal();
         init.frmBtn();
+        init.sizechart();
+	},
+	sizechart: function() {
+		jQuery('#sizechart button').click(function(e){
+			e.preventDefault();
+			jQuery(this).toggleClass('open');
+			if(jQuery(this).hasClass('open')) {
+				jQuery('#sizechart img').slideDown();
+			} else {
+				jQuery('#sizechart img').slideUp();
+			}
+		});
 	},
 	preLoad: function() {
         jQuery(window).load(function() {

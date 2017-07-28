@@ -628,6 +628,35 @@ header {
 		}
 	}
 }
+#sizechart {
+	margin-bottom: 25px;
+	button {
+		background: none;
+		border: none;
+		color: $blue;
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+		font-weight: lighter;
+		display: block;
+		@include transform(rotate(0deg));
+		@include transition(all 0.3s $authenticMotion);
+		&:focus {
+			outline: none;
+		}
+		&.open {
+			i {
+				@include transform(rotate(180deg));
+				@include transition(all 0.3s $authenticMotion);
+			}
+		}
+	}
+	img {
+		display: none;
+		min-width: 100%;
+		height: auto;
+	}
+}
 #videoModal {
 	position: fixed;
 	top: 0;

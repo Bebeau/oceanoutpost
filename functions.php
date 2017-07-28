@@ -57,7 +57,10 @@ add_filter( 'woocommerce_ship_to_different_address_checked', '__return_false' );
 
 add_action( 'woocommerce_product_meta_start', 'social_share' );
 function social_share() {
-    echo '<a class="sizechart">View Size Chart</a>';
+    echo '<div id="sizechart">';
+        echo '<button>View Size Chart <i class="fa fa-angle-down"></i></button>';
+        echo '<img src="'.get_bloginfo('template_directory').'/assets/images/sizechart.jpg" alt="" />';
+    echo '</div>';
     get_template_part( 'partials/theme/social', 'share' );
 }
 
