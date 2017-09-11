@@ -335,16 +335,17 @@ function oo_custom_label() {
 }
 
 // Custom Scripting to Move JavaScript from the Head to the Footer
-function remove_head_scripts() { 
-   remove_action('wp_head', 'wp_print_scripts'); 
-   remove_action('wp_head', 'wp_print_head_scripts', 9); 
-   remove_action('wp_head', 'wp_enqueue_scripts', 1);
+// function remove_head_scripts() { 
+//    remove_action('wp_head', 'wp_print_scripts'); 
+//    remove_action('wp_head', 'wp_print_head_scripts', 9); 
+//    remove_action('wp_head', 'wp_enqueue_scripts', 1);
 
-   add_action('wp_footer', 'wp_print_scripts', 5);
-   add_action('wp_footer', 'wp_enqueue_scripts', 5);
-   add_action('wp_footer', 'wp_print_head_scripts', 5);
-} 
-add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
+//    add_action('wp_footer', 'wp_print_scripts', 5);
+//    add_action('wp_footer', 'wp_enqueue_scripts', 5);
+//    add_action('wp_footer', 'wp_print_head_scripts', 5);
+// } 
+// This function is disabled to run the woo box plugin. Disabling will compromise load time.
+// add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
 
 // Register Main Shop Sidebar
 if ( function_exists('register_sidebar') ) {

@@ -106,6 +106,6 @@ echo '<section class="main">';
 		echo do_shortcode('[featured_products per_page="8"]');
 	echo '</div>';
 
-echo '</div>';
+echo '</section>';
 			
 get_footer(); ?>
