@@ -1354,6 +1354,9 @@ footer {
 .stars a {
   color: #444444 !important; }
 
+#crossSell h2 {
+  text-align: center; }
+
 .woocommerce input.button, .woocommerce input.button:disabled, .woocommerce input.button:disabled[disabled], .woocommerce #place_order {
   display: inline-block;
   position: relative;
@@ -1397,6 +1400,17 @@ footer {
   list-style: none;
   margin: 0 0 0;
   padding: 0; }
+  .woocommerce ul.products.cross-sell li.product {
+    width: 100%;
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    padding-bottom: 25px; }
+    .woocommerce ul.products.cross-sell li.product .price {
+      margin-right: 10px; }
   .woocommerce ul.products .star-rating {
     text-align: center;
     overflow: hidden;

@@ -81,6 +81,34 @@ function after_add_to_cart_button() {
     echo '</section>';
     echo '<img id="globalsign" src="'.get_bloginfo('template_directory').'/assets/images/globalsign.png" alt="" />';
 
+    $crosssell_ids = get_post_meta( get_the_ID(), '_crosssell_ids' ); 
+    $crosssell_ids = $crosssell_ids[0];
+
+    if(count($crosssell_ids) > 0) {
+        echo '<div id="crossSell">';
+            echo '<h2>You might also like..</h2>';
+            $args = array( 
+                'post_type' => 'product',
+                'post__in' => $crosssell_ids,
+                'posts_per_page' => 1,
+                'orderby' => 'rand'
+            );
+            $loop = new WP_Query( $args );
+            echo '<ul class="products cross-sell">';
+                while ( $loop->have_posts() ) : $loop->the_post();
+                    echo '<li class="product">';
+                        echo '<a href='.get_the_permalink().'>';
+                            the_post_thumbnail( 'medium' );
+                            the_title('<h2 class="woocommerce-loop-product__title">','</h2>');
+                            echo '<span class="price">'.wc_price(wc_get_product(get_the_ID())->get_price()).'</span>';
+                        echo '</a>';
+                        echo '<a href="'.get_the_permalink().'" class="add_to_cart_button">Select Options</a>';
+                    echo '</li>';
+                endwhile;
+            echo '</ul>';
+        echo '</div>';
+    }
+
 }
 
 if ( !wp_is_mobile() ) {
